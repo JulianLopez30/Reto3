@@ -27,14 +27,16 @@ public class Mensaje implements Serializable {
     private String messageText;
     
     @ManyToOne
+    @JoinColumn(name="id")
+    @JsonIgnoreProperties({"messages", "client", "reservations"})
+    private Finca farm;
+    
+    @ManyToOne
     @JoinColumn(name="idClient")
-    @JsonIgnoreProperties({"Messages", "client", "Reservations"})
+    @JsonIgnoreProperties({"messages", "client", "reservations"})
     private Cliente client;
 
-    @ManyToOne
-    @JoinColumn(name="id")
-    @JsonIgnoreProperties({"Messages", "client", "Reservations"})
-    private Finca farm;
+    
 
     
 
@@ -54,6 +56,14 @@ public class Mensaje implements Serializable {
         this.messageText = messageText;
     }
     
+     public Finca getFarm() {
+        return farm;
+    }
+
+    public void setFarm(Finca farm) {
+        this.farm = farm;
+    }
+    
      public Cliente getClient() {
         return client;
     }
@@ -62,13 +72,7 @@ public class Mensaje implements Serializable {
         this.client = client;
     }
 
-    public Finca getFarm() {
-        return farm;
-    }
-
-    public void setFarm(Finca farm) {
-        this.farm = farm;
-    }
+   
 
    
 
